@@ -34,7 +34,7 @@ public class BreakingTrap : Trap
     {
         while(true)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.6f);
             
             if (_breakingPhase == 3)
             {

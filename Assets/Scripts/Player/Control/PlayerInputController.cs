@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(IControllable))]
 public class PlayerInputController : MonoBehaviour
 {
     private IControllable _controllable;
+    private IPausable _pausable;
 
     private PlayerInput _playerInput;
 
@@ -11,17 +13,20 @@ public class PlayerInputController : MonoBehaviour
     {
         _playerInput.Enable();
         _playerInput.Gameplay.Jump.performed += OnJumpPerformed;
+        _playerInput.Gameplay.Pause.performed += OnPausePerformed;
     }
 
     private void OnDisable()
     {
         _playerInput.Disable();
         _playerInput.Gameplay.Jump.performed -= OnJumpPerformed;
+        _playerInput.Gameplay.Pause.performed -= OnPausePerformed;
     }
 
-    public void Initialize(IControllable controllable)
+    public void Initialize(IControllable controllable, IPausable pausable)
     {
         _controllable = controllable;
+        _pausable = pausable;
 
         _playerInput = new PlayerInput();
     }
@@ -38,8 +43,13 @@ public class PlayerInputController : MonoBehaviour
         _controllable.Move(inputMovementDirection);
     }
 
-    private void OnJumpPerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void OnJumpPerformed(InputAction.CallbackContext context)
     {
         _controllable.Jump();
+    }
+
+    private void OnPausePerformed(InputAction.CallbackContext context)
+    {
+        _pausable.OpenPauseMenu();
     }
 }

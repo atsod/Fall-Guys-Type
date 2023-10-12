@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
+    [Header("PauseMenu")]
+    [SerializeField] private PauseUI _pauseUI;
+
     [Header("PlayerInput")]
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerInputController _playerInputController;
@@ -20,7 +23,7 @@ public class Bootstrap : MonoBehaviour
     private void Awake()
     {
         _playerMovement.Initialize();
-        _playerInputController.Initialize(_playerMovement);
+        _playerInputController.Initialize(_playerMovement, _pauseUI);
         _player.Initialize();
         _healthBarUI.Initialize();
 

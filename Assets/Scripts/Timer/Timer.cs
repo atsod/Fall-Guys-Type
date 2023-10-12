@@ -1,12 +1,11 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Timer
 {
-    public event Action<float> OnTimeUpdated;
-    public event Action<float> OnTimeFinished;
+    public static event Action<float> OnTimeUpdated;
+    public static event Action<float> OnTimeFinished;
 
     private float _time;
 
@@ -19,18 +18,6 @@ public class Timer
     public Timer(MonoBehaviour context)
     {
         _context = context;
-    }
-
-    private IEnumerator Count()
-    {
-        while(!_isPlayerFinished)
-        {
-            _time += Time.deltaTime;
-
-            OnTimeUpdated?.Invoke(_time);
-
-            yield return null;
-        }
     }
 
     public void Start()
@@ -47,6 +34,18 @@ public class Timer
             _context.StopCoroutine(_countCoroutine);
 
             OnTimeFinished?.Invoke(_time);
+        }
+    }
+
+    private IEnumerator Count()
+    {
+        while (!_isPlayerFinished)
+        {
+            _time += Time.deltaTime;
+
+            OnTimeUpdated?.Invoke(_time);
+
+            yield return null;
         }
     }
 }

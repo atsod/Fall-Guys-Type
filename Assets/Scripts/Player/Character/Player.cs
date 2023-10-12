@@ -12,12 +12,14 @@ public class Player : MonoBehaviour
     {
         DelayedDamageTrap.OnTrapHit += OnPlayerDamaged;
         SpikeTrap.OnTrapHit += OnPlayerDamaged;
+        DeadZone.OnPlayerFellOffLevel += OnPlayerDamaged;
     }
 
     private void OnDisable()
     {
         DelayedDamageTrap.OnTrapHit -= OnPlayerDamaged;
         SpikeTrap.OnTrapHit -= OnPlayerDamaged;
+        DeadZone.OnPlayerFellOffLevel -= OnPlayerDamaged;
     }
     
     public void Initialize()
