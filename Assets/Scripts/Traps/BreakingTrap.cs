@@ -18,7 +18,7 @@ public class BreakingTrap : Trap
     {
         _renderer = GetComponentInParent<MeshRenderer>();
 
-        _delayBetweenBreakingPhases = 0.5f;
+        _delayBetweenBreakingPhases = 0.2f;
     }
 
     private void OnTriggerEnter(Collider other)

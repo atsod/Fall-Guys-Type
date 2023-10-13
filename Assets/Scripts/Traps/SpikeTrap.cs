@@ -54,7 +54,7 @@ public class SpikeTrap : Trap
 
             yield return new WaitForSeconds(_timeOfAnimation);
 
-            float randomDelay = (float) UnityEngine.Random.Range(100f, 300f) / 100;
+            float randomDelay = (float) UnityEngine.Random.Range(0f, 300f) / 100;
 
             yield return new WaitForSeconds(randomDelay);
         }
