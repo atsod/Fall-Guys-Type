@@ -9,6 +9,7 @@ public class BreakingTrap : Trap
 
     private MeshRenderer _renderer;
 
+    private float _delayBetweenBreakingPhases;
     private int _breakingPhase;
 
     private bool _isCoroutineStarted;
@@ -16,6 +17,8 @@ public class BreakingTrap : Trap
     private void Awake()
     {
         _renderer = GetComponentInParent<MeshRenderer>();
+
+        _delayBetweenBreakingPhases = 0.5f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,7 +37,7 @@ public class BreakingTrap : Trap
     {
         while(true)
         {
-            yield return new WaitForSeconds(0.6f);
+            yield return new WaitForSeconds(_delayBetweenBreakingPhases);
             
             if (_breakingPhase == 3)
             {
